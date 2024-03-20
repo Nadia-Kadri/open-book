@@ -1,4 +1,10 @@
 <h1>My books</h1>
+<div>
+  Sort by: 
+    <a href="/?sort=title">title</a>, 
+    <a href="/?sort=date">date</a>, 
+    <a href="/?sort=rating">rating</a>
+</div>
 <% books.forEach(book => { %>
   <h3><%= book.title %></h3>
   <p><%= book.author %></p>
