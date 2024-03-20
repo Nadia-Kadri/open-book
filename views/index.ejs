@@ -1,0 +1,9 @@
+<h1>My books</h1>
+<% books.forEach(book => { %>
+  <h3><%= book.title %></h3>
+  <p><%= book.author %></p>
+  <p><%= book.date_read %></p>
+  <p><%= book.rating %>/10</p>
+  <p><%= book.review %></p>
+  <hr>
+<% }) %>
