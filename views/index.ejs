@@ -1,15 +1,36 @@
-<h1>My books</h1>
-<div>
-  Sort by: 
-    <a href="/?sort=title">title</a>, 
-    <a href="/?sort=date">date</a>, 
-    <a href="/?sort=rating">rating</a>
-</div>
-<% books.forEach(book => { %>
-  <h3><%= book.title %></h3>
-  <p><%= book.author %></p>
-  <p><%= book.date_read %></p>
-  <p><%= book.rating %>/10</p>
-  <p><%= book.review %></p>
-  <hr>
-<% }) %>
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Book</title>
+  </head>
+
+  <body>
+    <h1>My books</h1>
+    <div>
+      Sort by: 
+        <a href="/?sort=title">title</a>, 
+        <a href="/?sort=date">date</a>, 
+        <a href="/?sort=rating">rating</a>
+    </div>
+    <div>
+      <a href="/new">Add a new book</a>
+    </div>
+    <% books.forEach(book => { %>
+      <h3><%= book.title %></h3>
+      <p><%= book.author %></p>
+      <img src="https://covers.openlibrary.org/b/isbn/<%= book.isbn %>-M.jpg" />
+      <p><%= book.date_read %></p>
+      <p><%= book.rating %>/10</p>
+      <p><%= book.review %></p>
+      
+      <button>
+        <a href="/delete/<%= book.id %>">Delete</a>
+      </button>
+      
+      <hr>
+    <% }) %>
+  </body>
+</html>
+
