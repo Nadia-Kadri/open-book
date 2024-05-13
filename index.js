@@ -39,10 +39,11 @@ app.get("/new", async (req, res) => {
 
 app.post("/new", async (req, res) => {
   const book = req.body;
-  await db.query(
+  const result = await db.query(
     "INSERT INTO book (title, author, isbn, review, rating, date_read) VALUES ($1, $2, $3, $4, $5, $6)",
     [book.title, book.author, book.isbn, book.review, book.rating, book.date_read]
   );
+
   console.log(book);
   // res.send("Book added");
   res.redirect("/?sort=date");
@@ -50,18 +51,11 @@ app.post("/new", async (req, res) => {
 
 app.get("/delete/:id", async (req, res) => {
   const id = req.params.id;
-  const result = await db.query(
-    "SELECT * FROM book WHERE id = $1",
-    [id]
-  );
-  const book = result.rows;
-
-  await db.query(
-    "DELETE FROM book WHERE id = $1",
-    [id]
-  );
+  const deletedBook = await db.query("SELECT * FROM book WHERE id = $1", [id]);
+  await db.query("DELETE FROM book WHERE id = $1", [id]);
+  const books = await db.query("SELECT * FROM book");
   
-  res.redirect("/");
+  res.render("index.ejs", { books: books.rows, deletedBook: deletedBook.rows });
 });
 
 app.listen(port, () => {
