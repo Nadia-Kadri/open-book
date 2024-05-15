@@ -18,37 +18,59 @@
       </div>
     </div>
 
-    <div class="container px-4 py-5" id="featured-3">
-      <h4 class="pb-2 border-bottom">
-        Sort By:
-          <a href="/?sort=title">title</a>, 
-          <a href="/?sort=date">date</a>, 
-          <a href="/?sort=rating">rating</a>
-          <a href="/new" class="float-end">Add a new book</a>
-      </h4>
+    <div class="container py-4" id="featured-3">
+      <div class="row justify-content-center">
+        <div class="col-lg-9 col-sm-12 pb-2 border-bottom h6">
+          Sort By:
+            <a href="/?sort=title">title</a>, 
+            <a href="/?sort=date">date</a>, 
+            <a href="/?sort=rating">rating</a>
+            <a href="/new" class="float-end">Add a new book</a>
+        </div>
+      </div>
     </div>
 
-    <div class="container-sm">
+    <div class="container">
+      <% books.forEach(book => { %>
+        <div class="row justify-content-center pb-4">
+          <div class="col-sm-2 pb-4 border-bottom">
+            <img src="https://covers.openlibrary.org/b/isbn/<%= book.isbn %>-M.jpg" width="120px" class="img-fluid"/>
+          </div>
 
-      <div>
-        <% books.forEach(book => { %>
-          <h5><%= book.title %></h5>
-          <p><%= book.author %></p>
-          <img src="https://covers.openlibrary.org/b/isbn/<%= book.isbn %>-M.jpg" />
-          <p><%= book.date_read %></p>
-          <p><%= book.rating %>/10</p>
-          <p><%= book.review %></p>
-          
-          <button>
-            <a href="/delete/<%= book.id %>">Delete</a>
-          </button>
-          
-          <hr>
-        <% }) %>
-      </div>
+          <div class="col-sm-3 pb-4 border-bottom">
+            <h6 class="mb-0"><%= book.title %></h6>
+            <p class="mb-0">by</p>
+            <p><%= book.author %></p>
+            <p><em>Date read: <%= format(book.date_read, "MMM d, yyyy") %></em></p>
+            
+            <p class="mb-0"><%= book.rating %>/5</p>
+            <% for( let i = 0; i < Math.floor(book.rating); i++ ) { %>
+              <i class="fa-solid fa-star" style="color: orange;"></i>
+            <% } %>
+            <% let remainder = 5 - book.rating %>
+            <% if (remainder % 1 === 0) { %>
+             <% for( let j = 0; j < remainder; j++ ) { %>
+              <i class="fa-regular fa-star" style="color: orange;"></i>
+             <% } %>
+            <% } else { %>
+              <i class="fa-solid fa-star-half-stroke" style="color: orange;"></i>
+              <% for( let k = 0; k < Math.floor(remainder); k++ ) { %>
+                <i class="fa-regular fa-star" style="color: orange;"></i>
+               <% } %>
+            <% } %>
+            
+          </div>
+
+          <div class="col-lg-4 col-sm-7 pb-4 border-bottom">
+            <p><%= book.review %></p>
+            <a href="/delete/<%= book.id %>" class="btn btn-secondary btn-sm">Delete</a>
+          </div>
+        </div>
+      <% }) %>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/f7b39fcb95.js" crossorigin="anonymous"></script>
   </body>
 </html>
 

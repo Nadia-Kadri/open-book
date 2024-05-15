@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
+import { format } from "date-fns";
 
 const app = express();
 const port = 3000;
@@ -29,8 +30,8 @@ app.get("/", async (req, res) => {
   } else {
     result = await db.query("SELECT * FROM book");
   }
-  
-  res.render("index.ejs", { books: result.rows })
+
+  res.render("index.ejs", { books: result.rows, format: format })
 });
 
 app.get("/new", async (req, res) => {
