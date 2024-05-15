@@ -40,13 +40,14 @@ app.get("/new", async (req, res) => {
 
 app.post("/new", async (req, res) => {
   const book = req.body;
-  const result = await db.query(
-    "INSERT INTO book (title, author, isbn, review, rating, date_read) VALUES ($1, $2, $3, $4, $5, $6)",
-    [book.title, book.author, book.isbn, book.review, book.rating, book.date_read]
-  );
-
-  console.log(book);
-  // res.send("Book added");
+  try {
+    await db.query(
+      "INSERT INTO book (title, author, isbn, review, rating, date_read) VALUES ($1, $2, $3, $4, $5, $6)",
+      [book.title, book.author, book.isbn, book.review, book.rating, book.date_read]
+    );
+  } catch (err) {
+    console.log(err);
+  }
   res.redirect("/?sort=date");
 });
 
