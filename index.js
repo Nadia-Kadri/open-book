@@ -56,7 +56,7 @@ app.get("/delete/:id", async (req, res) => {
   await db.query("DELETE FROM book WHERE id = $1", [id]);
   const books = await db.query("SELECT * FROM book");
   
-  res.render("index.ejs", { books: books.rows, deletedBook: deletedBook.rows });
+  res.redirect("/");
 });
 
 app.listen(port, () => {
