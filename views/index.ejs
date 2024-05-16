@@ -43,21 +43,23 @@
             <p><%= book.author %></p>
             <p><em>Date read: <%= format(book.date_read, "MMM d, yyyy") %></em></p>
             
-            <p class="mb-0"><%= book.rating %>/5</p>
-            <% for( let i = 0; i < Math.floor(book.rating); i++ ) { %>
-              <i class="fa-solid fa-star" style="color: orange;"></i>
-            <% } %>
-            <% let remainder = 5 - book.rating %>
-            <% if (remainder % 1 === 0) { %>
-             <% for( let j = 0; j < remainder; j++ ) { %>
-              <i class="fa-regular fa-star" style="color: orange;"></i>
-             <% } %>
-            <% } else { %>
-              <i class="fa-solid fa-star-half-stroke" style="color: orange;"></i>
-              <% for( let k = 0; k < Math.floor(remainder); k++ ) { %>
-                <i class="fa-regular fa-star" style="color: orange;"></i>
-               <% } %>
-            <% } %>
+            <span><small><%= book.rating %></small></span>
+            <span>
+              <% for( let i = 0; i < Math.floor(book.rating); i++ ) { %>
+                <i class="fa-solid fa-star me-n1" style="color: orange;"></i>
+              <% } %>
+              <% let remainder = 5 - book.rating %>
+              <% if (remainder % 1 === 0) { %>
+              <% for( let j = 0; j < remainder; j++ ) { %>
+                <i class="fa-regular fa-star me-n1" style="color: orange;"></i>
+              <% } %>
+              <% } else { %>
+                <i class="fa-solid fa-star-half-stroke me-n1" style="color: orange;"></i>
+                <% for( let k = 0; k < Math.floor(remainder); k++ ) { %>
+                  <i class="fa-regular fa-star me-n1" style="color: orange;"></i>
+                <% } %>
+              <% } %>
+            </span>
             
           </div>
 

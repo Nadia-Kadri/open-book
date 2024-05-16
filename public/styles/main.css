@@ -4,3 +4,7 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.me-n1 {
+  margin-right: -0.25rem !important;
+}
