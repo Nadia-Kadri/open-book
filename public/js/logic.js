@@ -1,7 +1,15 @@
-document.querySelector("#title").addEventListener("keydown", handleKeyDown);
+document.querySelector("#title").addEventListener("keydown", handleTitleInputKeyDown);
+document.querySelectorAll(".rating-input").forEach(element => {
+  element.addEventListener("click", handleRatingInputClick);
+});
 
-function handleKeyDown(e) {
+function handleTitleInputKeyDown(e) {
   console.log(e);
+}
+
+function handleRatingInputClick(e) {
+  console.log(e.currentTarget);
+  console.log(e.currentTarget.getAttribute("value"));
 }
 
 axios.get('https://openlibrary.org/search.json?title=harry+potter')
