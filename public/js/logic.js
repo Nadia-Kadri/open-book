@@ -9,13 +9,10 @@ ratingInputs.forEach(element => {
 });
 
 function handleTitleInputKeyDown(e) {
-  // console.log(e.key);
-  const searchInput = titleSearch.value.toLowerCase();
+  const searchInput = titleSearch.value.toLowerCase().replace(/\s/g, "+");
   if (searchInput.length >= 3) {
-    console.log(searchInput);
     openLibrarySearch(searchInput);
   }
-
 }
 
 function handleRatingInputClick(e) {
@@ -31,17 +28,23 @@ function handleRatingInputClick(e) {
 }
 
 function openLibrarySearch(input) {
-  // 'https://openlibrary.org/search.json?title=harry+potter'
-  axios.get('https://openlibrary.org/search.json?title=' + input)
+  axios.get('https://openlibrary.org/search.json?title=' + input + "&limit=5")
   .then(function (response) {
-    // handle success
-    console.log(response.data.docs[0]);
+    // console.log(response.data.docs)
+    let bookArr = [];
+
+    response.data.docs.forEach(book => {
+      let bookObj = {
+        title: book.title ? book.title : "",
+        author: book.author_name ? book.author_name : "",
+        isbn: book.isbn ? book.isbn[0] : ""
+      }
+      bookArr.push(bookObj);
+    });
+
+    console.log(bookArr);
   })
   .catch(function (error) {
-    // handle error
     console.log(error);
-  })
-  .finally(function () {
-    // always executed
   });
 }
