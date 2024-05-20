@@ -1,14 +1,21 @@
 const ratingInputs = document.querySelectorAll(".rating-input");
 const ratingInputsArray = [...ratingInputs];
+const titleSearch = document.querySelector("#title");
 
 // Event Listeners
-document.querySelector("#title").addEventListener("keydown", handleTitleInputKeyDown);
+titleSearch.addEventListener("keyup", handleTitleInputKeyDown);
 ratingInputs.forEach(element => {
   element.addEventListener("click", handleRatingInputClick);
 });
 
 function handleTitleInputKeyDown(e) {
-  console.log(e);
+  // console.log(e.key);
+  const searchInput = titleSearch.value.toLowerCase();
+  if (searchInput.length >= 3) {
+    console.log(searchInput);
+    openLibrarySearch(searchInput);
+  }
+
 }
 
 function handleRatingInputClick(e) {
@@ -23,7 +30,9 @@ function handleRatingInputClick(e) {
   });
 }
 
-axios.get('https://openlibrary.org/search.json?title=harry+potter')
+function openLibrarySearch(input) {
+  // 'https://openlibrary.org/search.json?title=harry+potter'
+  axios.get('https://openlibrary.org/search.json?title=' + input)
   .then(function (response) {
     // handle success
     console.log(response.data.docs[0]);
@@ -35,3 +44,4 @@ axios.get('https://openlibrary.org/search.json?title=harry+potter')
   .finally(function () {
     // always executed
   });
+}
