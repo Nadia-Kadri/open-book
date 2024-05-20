@@ -1,5 +1,9 @@
+const ratingInputs = document.querySelectorAll(".rating-input");
+const ratingInputsArray = [...ratingInputs];
+
+// Event Listeners
 document.querySelector("#title").addEventListener("keydown", handleTitleInputKeyDown);
-document.querySelectorAll(".rating-input").forEach(element => {
+ratingInputs.forEach(element => {
   element.addEventListener("click", handleRatingInputClick);
 });
 
@@ -8,8 +12,15 @@ function handleTitleInputKeyDown(e) {
 }
 
 function handleRatingInputClick(e) {
-  console.log(e.currentTarget);
-  console.log(e.currentTarget.getAttribute("value"));
+  const selectedValue = parseFloat(e.currentTarget.getAttribute("value"));
+
+  ratingInputsArray.forEach(element => {
+    if (parseFloat(element.getAttribute("value")) <= selectedValue) {
+      element.classList.replace("fa-regular", "fa-solid");
+    } else {
+      element.classList.replace("fa-solid", "fa-regular");
+    }
+  });
 }
 
 axios.get('https://openlibrary.org/search.json?title=harry+potter')
