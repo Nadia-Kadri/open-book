@@ -5,10 +5,22 @@
   background-size: cover;
 }
 
+/* star rating */
 .me-n1 {
   margin-right: -0.25rem !important;
 }
 
 input[name="rating"] {
   display: none;
+}
+
+/* title search dropdown */
+.titleSearchContainer {
+  position: relative;
+}
+
+.titleSearchDropdown {
+  position: absolute;
+  width: 100%;
+  visibility: hidden;
 }
