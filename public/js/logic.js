@@ -11,9 +11,11 @@ titleInput.addEventListener("focusout", () => titleSearchDropdown.style.visibili
 
 ratingInputs.forEach(el => el.addEventListener("click", handleRatingInputClick));
 
-function handleTitleInputKeyUp() {
+// Event Handlers
+async function handleTitleInputKeyUp() {
   const input = titleInput.value.toLowerCase().replace(/\s/g, "+");
-  input.length >= 3 ? openLibrarySearch(input) : null;
+  const searchResult = await openLibrarySearch(input);
+  createDropdownItems(searchResult);
 }
 
 function handleRatingInputClick(e) {
@@ -28,21 +30,39 @@ function handleRatingInputClick(e) {
   });
 }
 
-function openLibrarySearch(input) {
-  axios.get('https://openlibrary.org/search.json?title=' + input + "&limit=5")
-  .then(res => {
-    let bookArr = [];
-
+// Open Library API
+async function openLibrarySearch(input) {
+  let bookArr = [];
+  
+  try {
+    const res = await axios.get('https://openlibrary.org/search.json?title=' + input + "&limit=5");
     res.data.docs.forEach(book => {
       let bookObj = {
         title: book.title ? book.title : "",
-        author: book.author_name ? book.author_name : "",
+        author: book.author_name ? book.author_name[0] : "",
         isbn: book.isbn ? book.isbn[0] : ""
       }
       bookArr.push(bookObj);
     });
+  } catch (err) {
+    console.log(err);
+  }
+  
+  return bookArr;
+}
 
-    console.log(bookArr);
-  })
-  .catch(err => console.log(err));
+// Dropdown HTML
+function createDropdownItems(arr) {
+  let html = ``;
+  arr.forEach(el => {
+    let div = `
+      <div class="titleSearchDropdown_item border bg-body-tertiary p-1" data-isbn="${el.isbn}">
+        <div class="small fw-medium">${el.title}</div>
+        <div class="small">by ${el.author}</div>
+      </div>
+    `;
+    html = html + div;
+  });
+
+  titleSearchDropdown.innerHTML = html;
 }

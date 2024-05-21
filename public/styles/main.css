@@ -24,3 +24,11 @@ input[name="rating"] {
   width: 100%;
   visibility: hidden;
 }
+
+.titleSearchDropdown_item {
+ cursor: pointer;
+}
+
+/* .titleSearchDropdown_item:hover {
+  
+} */
