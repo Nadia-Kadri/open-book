@@ -22,13 +22,13 @@ input[name="rating"] {
 .titleSearchDropdown {
   position: absolute;
   width: 100%;
-  visibility: hidden;
 }
 
 .titleSearchDropdown_item {
  cursor: pointer;
+ background-color: #f5f5f5;
 }
 
-/* .titleSearchDropdown_item:hover {
-  
-} */
+.titleSearchDropdown_item:hover {
+  background-color: #fff;
+}

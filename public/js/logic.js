@@ -1,13 +1,15 @@
 const ratingInputs = document.querySelectorAll(".rating-input");
 const ratingInputsArr = [...ratingInputs];
+
 const titleInput = document.querySelector("#title");
+const authorInput = document.querySelector("#author");
+const isbnInput = document.querySelector("#isbn");
+
 const titleSearchDropdown = document.querySelector(".titleSearchDropdown");
 
 // Event Listeners
 titleInput.addEventListener("keyup", handleTitleInputKeyUp);
-
-titleInput.addEventListener("focusin", () => titleSearchDropdown.style.visibility = "visible");
-titleInput.addEventListener("focusout", () => titleSearchDropdown.style.visibility = "hidden");
+titleInput.addEventListener("focusout", () => setTimeout(() => titleSearchDropdown.innerHTML = "", 500));
 
 ratingInputs.forEach(el => el.addEventListener("click", handleRatingInputClick));
 
@@ -53,16 +55,19 @@ async function openLibrarySearch(input) {
 
 // Dropdown HTML
 function createDropdownItems(arr) {
-  let html = ``;
+  titleSearchDropdown.innerHTML = "";
   arr.forEach(el => {
-    let div = `
-      <div class="titleSearchDropdown_item border bg-body-tertiary p-1" data-isbn="${el.isbn}">
-        <div class="small fw-medium">${el.title}</div>
-        <div class="small">by ${el.author}</div>
-      </div>
+    let div = document.createElement('div');
+    div.classList.add("titleSearchDropdown_item", "border", "p-1");
+    div.innerHTML = `
+      <div class="small fw-medium">${el.title}</div>
+      <div class="small">by ${el.author}</div>
     `;
-    html = html + div;
+    titleSearchDropdown.appendChild(div);
+    div.addEventListener("click", () => {
+      titleInput.value = el.title;
+      authorInput.value = el.author;
+      isbnInput.value = el.isbn;
+    });
   });
-
-  titleSearchDropdown.innerHTML = html;
 }

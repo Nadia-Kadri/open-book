@@ -35,7 +35,7 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/new", async (req, res) => {
-  res.render("new.ejs");
+  res.render("new.ejs", { format: format });
 });
 
 app.post("/new", async (req, res) => {

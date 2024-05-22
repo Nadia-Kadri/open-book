@@ -42,7 +42,7 @@
           <div>
             <div class="form-label">Rating:</div>
 
-            <input type="radio" id="rating-one" name="rating" value="1" />
+            <input type="radio" id="rating-one" name="rating" value="1" required/>
             <label for="rating-one">
               <i class="fa-regular fa-star fa-xl me-n1 rating-input" style="color: orange;" value="1"></i>
             </label>
@@ -69,7 +69,7 @@
           </div>
               
           <label for="date_read" class="form-label">Date read:</label>
-          <input type="date" class="form-control" name="date_read" id="date_read" required>
+          <input type="date" class="form-control" name="date_read" id="date_read" value="<%= format(Date.now(), "yyyy-MM-dd") %>" required>
       
           <button type="submit" class="btn btn-secondary mt-3">Submit</button>
         </form>
