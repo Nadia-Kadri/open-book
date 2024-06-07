@@ -64,10 +64,10 @@ function createDropdownItems(arr) {
       <div class="small">by ${el.author}</div>
     `;
     titleSearchDropdown.appendChild(div);
-    div.addEventListener("click", () => {
+    div.addEventListener("click", (e) => {
       titleInput.value = el.title;
       authorInput.value = el.author;
       isbnInput.value = el.isbn;
     });
-  });
+  });  
 }

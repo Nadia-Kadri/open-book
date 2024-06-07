@@ -36,3 +36,12 @@ VALUES
 	5,
  	'2024-03-01'
 );
+
+CREATE TABLE users (
+	id SERIAL PRIMARY KEY,
+	username VARCHAR(100) NOT NULL UNIQUE,
+	password VARCHAR(100)
+);
+
+INSERT INTO users (username, password)
+VALUES ('admin', '$2b$10$sff.j43VzUDBp7ZB3fvhSOU21lx5p2r984Tk/kACYazHKaRfG7jie');
