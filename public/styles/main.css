@@ -1,11 +1,26 @@
-#header {
-  background-image: url("../assets/images/header-image2.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+body {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 18px;
 }
 
-/* star rating */
+/* Navbar */
+.navbar {
+  background-color: #f8f3e5;
+}
+
+/* Header */
+#header {
+  padding-top: 156px;
+  padding-bottom: 100px;
+  background-color: #f8f3e5;
+}
+
+/* Books */
+#books {
+  padding-top: 50px;
+}
+
+/* Star rating */
 .me-n1 {
   margin-right: -0.25rem !important;
 }
@@ -14,7 +29,7 @@ input[name="rating"] {
   display: none;
 }
 
-/* title search dropdown */
+/* Title search dropdown */
 .titleSearchContainer {
   position: relative;
 }
@@ -31,4 +46,20 @@ input[name="rating"] {
 
 .titleSearchDropdown_item:hover {
   background-color: #fff;
+}
+
+/* Media queries */
+@media (min-width: 1200px) {
+  .container-media-query {
+    width: 75%;
+  }
+}
+
+@media (max-width: 992px) {
+  /* #header {
+    text-align: center;
+  } */
+  .container-media-query {
+    text-align: center;
+  }
 }

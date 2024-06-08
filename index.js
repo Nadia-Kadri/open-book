@@ -12,6 +12,7 @@ const app = express();
 const port = 3000;
 env.config();
 
+// Express session middleware to store user session when admin is logged in
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -22,9 +23,11 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+// Initialize passport and allow passport to use express session
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Create PostgreSQL client and connect to database
 const db = new pg.Client({
   user: process.env.PG_USER,
   host: process.env.PG_HOST,
@@ -34,6 +37,7 @@ const db = new pg.Client({
 });
 db.connect();
 
+// Non-admin view of book list
 app.get("/", async (req, res) => {
   // /?sort=title /?sort=date /?sort=rating
   const sort = req.query.sort;
@@ -50,10 +54,22 @@ app.get("/", async (req, res) => {
   res.render("index.ejs", { books: result.rows, format: format })
 });
 
+// Admin view of book list
+app.get("/admin", async (req, res) => {
+  if (req.isAuthenticated()) {
+    let result = await db.query("SELECT * FROM book ORDER BY date_read DESC");
+    res.render("admin.ejs", { books: result.rows, format: format });
+  } else {
+    res.redirect("/login");
+  }
+});
+
+// Login page
 app.get("/login", (req, res) => {
   res.render("login.ejs");
-})
+});
 
+// New book form page for admin
 app.get("/new", async (req, res) => {
   if (req.isAuthenticated()) {
     res.render("new.ejs", { format: format });
@@ -62,6 +78,7 @@ app.get("/new", async (req, res) => {
   }
 });
 
+// Route to create new book entry
 app.post("/new", async (req, res) => {
   const book = req.body;
   try {
@@ -72,20 +89,21 @@ app.post("/new", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-  res.redirect("/?sort=date");
+  res.redirect("/admin");
 });
 
+// Route to delete book entry
 app.get("/delete/:id", async (req, res) => {
   const id = req.params.id;
   await db.query("DELETE FROM book WHERE id = $1", [id]);
-  
-  res.redirect("/");
+  res.redirect("/admin");
 });
 
+// Login form post route
 app.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/new",
+    successRedirect: "/admin",
     failureRedirect: "/login",
   })
 );
@@ -94,9 +112,7 @@ passport.use(
   "local",
   new Strategy(async function verify(username, password, cb) {
     try {
-      const result = await db.query("SELECT * FROM users WHERE username = $1 ", [
-        username,
-      ]);
+      const result = await db.query("SELECT * FROM users WHERE username = $1 ", [username]);
       if (result.rows.length > 0) {
         const user = result.rows[0];
         const storedHashedPassword = user.password;
@@ -113,7 +129,7 @@ passport.use(
           }
         });
       } else {
-        return cb("User not found");
+        return cb("Invalid username");
       }
     } catch (err) {
       console.log(err);
