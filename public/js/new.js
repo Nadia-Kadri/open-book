@@ -1,9 +1,12 @@
+const form = document.querySelector("#new-book-form");
+const titleInput = form.title;
+const authorInput = form.author;
+const isbnInput = form.isbn;
+const reviewInput = form.review;
+const date_readInput = form.date_read;
+
 const ratingInputs = document.querySelectorAll(".rating-input");
 const ratingInputsArr = [...ratingInputs];
-
-const titleInput = document.querySelector("#title");
-const authorInput = document.querySelector("#author");
-const isbnInput = document.querySelector("#isbn");
 
 const titleSearchDropdown = document.querySelector(".titleSearchDropdown");
 
@@ -12,6 +15,8 @@ titleInput.addEventListener("keyup", handleTitleInputKeyUp);
 titleInput.addEventListener("focusout", () => setTimeout(() => titleSearchDropdown.innerHTML = "", 500));
 
 ratingInputs.forEach(el => el.addEventListener("click", handleRatingInputClick));
+
+form.addEventListener("submit", handleNewBookFormSubmission);
 
 // Event Handlers
 async function handleTitleInputKeyUp() {
@@ -30,6 +35,35 @@ function handleRatingInputClick(e) {
       el.classList.replace("fa-solid", "fa-regular");
     }
   });
+}
+
+function handleNewBookFormSubmission(e) {
+  validateFormData(e, titleInput.value, authorInput.value, isbnInput.value, reviewInput.value, date_readInput.value);
+}
+
+function validateFormData(e, title, author, isbn, review, date) {
+  if (title.length > 200) {
+    alert("Title character count of 200 exceeded, please enter a valid title");
+    e.preventDefault();
+  }
+  if (author.length > 100) {
+    alert("Author name character count of 100 exceeded, please enter a valid author name");
+    e.preventDefault();
+  }
+  if (isbn.length > 13 || /\D/.test(isbn)) {
+    alert("Invalid ISBN: Please enter a 10 or 13 digit ISBN without dashes. ISBNs should only contain numbers.");
+    e.preventDefault();
+  }
+  if (review.length > 10000) {
+    alert("Review character count of 10,000 exceeded, please enter a valid review");
+    e.preventDefault();
+  }
+  const currentYear = new Date().getFullYear();
+  const inputYear = parseInt(date.split("-")[0]);
+  if (inputYear < 1924 || inputYear > currentYear) {
+    alert("Please enter a valid date");
+    e.preventDefault();
+  }
 }
 
 // Open Library API

@@ -29,7 +29,13 @@ input[name="rating"] {
   display: none;
 }
 
+/* Admin Books */
 #admin-books {
+  padding-top: 64px;
+}
+
+/* New Book Form */
+#new-book {
   padding-top: 64px;
 }
 

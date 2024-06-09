@@ -48,7 +48,7 @@ app.get("/", async (req, res) => {
     sort === "date" ? result = await db.query("SELECT * FROM book ORDER BY date_read DESC") : "";
     sort === "rating" ? result = await db.query("SELECT * FROM book ORDER BY rating DESC") : "";
   } else {
-    result = await db.query("SELECT * FROM book");
+    result = await db.query("SELECT * FROM book ORDER BY date_read DESC");
   }
 
   res.render("index.ejs", { books: result.rows, format: format })
@@ -98,6 +98,7 @@ app.post("/new", async (req, res) => {
     );
   } catch (err) {
     console.log(err);
+    // res.sendStatus(404);
   }
   res.redirect("/admin");
 });
