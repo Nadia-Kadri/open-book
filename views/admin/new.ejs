@@ -10,7 +10,7 @@
 
 <body>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-sm fixed-top">
+  <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container-sm container-media-query">
       <a class="navbar-brand" href="/">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmark-heart" viewBox="0 0 16 16">
@@ -35,67 +35,75 @@
           <li><a class="nav-link" href="/admin">Dashboard</a></li>
           <li><a class="nav-link" href="/new">+ New Book</a></li>
           <li><a class="nav-link" href="#">+ New Quote</a></li>
-          <li><a class="nav-link" href="#">Logout</a></li>
+          <li><a class="nav-link" href="/logout">Logout</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <div class="container-sm container-media-query">
+  <div class="container-sm">
     <!-- New Book Form -->
     <section id="new-book"></section>
       <h1 class="text-center">Add a New Book</h1>
-      <form action="/new" method="post" id="new-book-form">
-        <label for="title" class="form-label">Title:</label>
-        <div class="titleSearchContainer">
-          <input type="search" class="form-control" name="title" id="title" required>
-          <div class="titleSearchDropdown"></div>
-        </div>
-    
-        <label for="author" class="form-label">Author:</label>
-        <input type="text" class="form-control" name="author" id="author" required>
-
-        <label for="isbn" class="form-label">ISBN:</label>
-        <input type="text" class="form-control" name="isbn" id="isbn" required>
-
-        <label for="review" class="form-label">Review:</label>
-        <textarea class="form-control" name="review" id="review" required></textarea>
-        <!-- <input type="text" class="form-control" name="review" id="review" required> -->
-
-        <div>
-          <div class="form-label">Rating:</div>
-
-          <input type="radio" id="rating-one" name="rating" value="1" required/>
-          <label for="rating-one">
-            <i class="fa-regular fa-star fa-xl me-n1 rating-input" style="color: orange;" value="1"></i>
-          </label>
-
-          <input type="radio" id="rating-two" name="rating" value="2" />
-          <label for="rating-two">
-            <i class="fa-regular fa-star fa-xl me-n1 rating-input" style="color: orange;" value="2"></i>
-          </label>
-
-          <input type="radio" id="rating-three" name="rating" value="3" />
-          <label for="rating-three">
-            <i class="fa-regular fa-star fa-xl me-n1 rating-input" style="color: orange;" value="3"></i>
-          </label>
-
-          <input type="radio" id="rating-four" name="rating" value="4" />
-          <label for="rating-four">
-            <i class="fa-regular fa-star fa-xl me-n1 rating-input" style="color: orange;" value="4"></i>
-          </label>
-
-          <input type="radio" id="rating-five" name="rating" value="5" />
-          <label for="rating-five">
-            <i class="fa-regular fa-star fa-xl me-n1 rating-input" style="color: orange;" value="5"></i>
-          </label>
-        </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <div class="card">
+            <div class="card-body">
+              <form action="/new" method="post" id="new-book-form">
+                <label for="title" class="form-label">Title:</label>
+                <div class="titleSearchContainer">
+                  <input type="search" class="form-control" name="title" id="title" required>
+                  <div class="titleSearchDropdown"></div>
+                </div>
             
-        <label for="date_read" class="form-label">Date read:</label>
-        <input type="date" class="form-control" name="date_read" id="date_read" value="<%= format(Date.now(), "yyyy-MM-dd") %>" required>
-    
-        <button type="submit" class="btn btn-secondary mt-3">Submit</button>
-      </form>
+                <label for="author" class="form-label">Author:</label>
+                <input type="text" class="form-control" name="author" id="author" required>
+
+                <label for="isbn" class="form-label">ISBN:</label>
+                <input type="text" class="form-control" name="isbn" id="isbn" required>
+
+                <label for="review" class="form-label">Review:</label>
+                <textarea class="form-control" name="review" id="review" required></textarea>
+                <!-- <input type="text" class="form-control" name="review" id="review" required> -->
+
+                <div>
+                  <div class="form-label">Rating:</div>
+
+                  <input type="radio" id="rating-one" name="rating" value="1" required/>
+                  <label for="rating-one">
+                    <i class="fa-regular fa-star fa-xl me-n1 rating-input" style="color: orange;" value="1"></i>
+                  </label>
+
+                  <input type="radio" id="rating-two" name="rating" value="2" />
+                  <label for="rating-two">
+                    <i class="fa-regular fa-star fa-xl me-n1 rating-input" style="color: orange;" value="2"></i>
+                  </label>
+
+                  <input type="radio" id="rating-three" name="rating" value="3" />
+                  <label for="rating-three">
+                    <i class="fa-regular fa-star fa-xl me-n1 rating-input" style="color: orange;" value="3"></i>
+                  </label>
+
+                  <input type="radio" id="rating-four" name="rating" value="4" />
+                  <label for="rating-four">
+                    <i class="fa-regular fa-star fa-xl me-n1 rating-input" style="color: orange;" value="4"></i>
+                  </label>
+
+                  <input type="radio" id="rating-five" name="rating" value="5" />
+                  <label for="rating-five">
+                    <i class="fa-regular fa-star fa-xl me-n1 rating-input" style="color: orange;" value="5"></i>
+                  </label>
+                </div>
+                    
+                <label for="date_read" class="form-label">Date read:</label>
+                <input type="date" class="form-control" name="date_read" id="date_read" value="<%= format(Date.now(), "yyyy-MM-dd") %>" required>
+            
+                <button type="submit" class="btn btn-secondary mt-3">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
 
   <!-- <div class="container mt-5">

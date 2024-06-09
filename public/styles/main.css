@@ -39,6 +39,11 @@ input[name="rating"] {
   padding-top: 64px;
 }
 
+/* Login Form */
+#login-form {
+  padding-top: 64px;
+}
+
 /* Title search dropdown */
 .titleSearchContainer {
   position: relative;

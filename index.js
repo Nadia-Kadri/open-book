@@ -79,6 +79,16 @@ app.get("/login", (req, res) => {
   res.render("login.ejs");
 });
 
+// Logout route
+app.get("/logout", (req, res) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
+
 // New book form page for admin
 app.get("/new", async (req, res) => {
   if (req.isAuthenticated()) {
