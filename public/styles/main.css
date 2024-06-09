@@ -29,6 +29,10 @@ input[name="rating"] {
   display: none;
 }
 
+#admin-books {
+  padding-top: 64px;
+}
+
 /* Title search dropdown */
 .titleSearchContainer {
   position: relative;

@@ -54,11 +54,21 @@ app.get("/", async (req, res) => {
   res.render("index.ejs", { books: result.rows, format: format })
 });
 
+// Route to quotes page
+app.get("/quotes", (req, res) => {
+  res.render("quotes.ejs");
+});
+
+// Route to contact page
+app.get("/contact", (req, res) => {
+  res.render("contact.ejs");
+});
+
 // Admin view of book list
 app.get("/admin", async (req, res) => {
   if (req.isAuthenticated()) {
     let result = await db.query("SELECT * FROM book ORDER BY date_read DESC");
-    res.render("admin.ejs", { books: result.rows, format: format });
+    res.render("admin/admin.ejs", { books: result.rows, format: format });
   } else {
     res.redirect("/login");
   }
@@ -72,13 +82,13 @@ app.get("/login", (req, res) => {
 // New book form page for admin
 app.get("/new", async (req, res) => {
   if (req.isAuthenticated()) {
-    res.render("new.ejs", { format: format });
+    res.render("admin/new.ejs", { format: format });
   } else {
     res.redirect("/login");
   }
 });
 
-// Route to create new book entry
+// Route to post new book entry to database
 app.post("/new", async (req, res) => {
   const book = req.body;
   try {
@@ -92,7 +102,7 @@ app.post("/new", async (req, res) => {
   res.redirect("/admin");
 });
 
-// Route to delete book entry
+// Route to delete book entry from database
 app.get("/delete/:id", async (req, res) => {
   const id = req.params.id;
   await db.query("DELETE FROM book WHERE id = $1", [id]);
