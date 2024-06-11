@@ -44,20 +44,20 @@ app.get("/", async (req, res) => {
   let result;
 
   if (sort) {
-    sort === "title" ? result = await db.query("SELECT * FROM book ORDER BY title ASC") : "";
-    sort === "date" ? result = await db.query("SELECT * FROM book ORDER BY date_read DESC") : "";
-    sort === "rating" ? result = await db.query("SELECT * FROM book ORDER BY rating DESC") : "";
+    sort === "title" ? result = await db.query("SELECT * FROM books ORDER BY title ASC") : "";
+    sort === "date" ? result = await db.query("SELECT * FROM books ORDER BY date_read DESC") : "";
+    sort === "rating" ? result = await db.query("SELECT * FROM books ORDER BY rating DESC") : "";
   } else {
-    result = await db.query("SELECT * FROM book ORDER BY date_read DESC");
+    result = await db.query("SELECT * FROM books ORDER BY date_read DESC");
   }
 
   res.render("index.ejs", { books: result.rows, format: format })
 });
 
 // Route to quotes page
-app.get("/quotes", (req, res) => {
-  res.render("quotes.ejs");
-});
+// app.get("/quotes", (req, res) => {
+//   res.render("quotes.ejs");
+// });
 
 // Route to contact page
 app.get("/contact", (req, res) => {
@@ -67,7 +67,7 @@ app.get("/contact", (req, res) => {
 // Admin view of book list
 app.get("/admin", async (req, res) => {
   if (req.isAuthenticated()) {
-    let result = await db.query("SELECT * FROM book ORDER BY date_read DESC");
+    let result = await db.query("SELECT * FROM books ORDER BY date_read DESC");
     res.render("admin/admin.ejs", { books: result.rows, format: format });
   } else {
     res.redirect("/login");
@@ -103,7 +103,7 @@ app.post("/new", async (req, res) => {
   const book = req.body;
   try {
     await db.query(
-      "INSERT INTO book (title, author, isbn, review, rating, date_read) VALUES ($1, $2, $3, $4, $5, $6)",
+      "INSERT INTO books (title, author, isbn, review, rating, date_read) VALUES ($1, $2, $3, $4, $5, $6)",
       [book.title, book.author, book.isbn, book.review, book.rating, book.date_read]
     );
   } catch (err) {
@@ -116,7 +116,7 @@ app.post("/new", async (req, res) => {
 // Route to delete book entry from database
 app.get("/delete/:id", async (req, res) => {
   const id = req.params.id;
-  await db.query("DELETE FROM book WHERE id = $1", [id]);
+  await db.query("DELETE FROM books WHERE id = $1", [id]);
   res.redirect("/admin");
 });
 

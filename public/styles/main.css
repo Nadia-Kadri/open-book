@@ -15,6 +15,14 @@ body {
   background-color: #f8f3e5;
 }
 
+#header h1 {
+  font-size: 48px;
+}
+
+#header p {
+  font-size: 19px;
+}
+
 /* Books */
 #books {
   padding-top: 50px;
@@ -27,6 +35,13 @@ body {
 
 input[name="rating"] {
   display: none;
+}
+
+/* Contact */
+#contact {
+  padding-top: 156px;
+  /* background-color: #f8f3e5; */
+  height: 100vh;
 }
 
 /* Admin Books */
