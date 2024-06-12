@@ -16,7 +16,7 @@ titleInput.addEventListener("focusout", () => setTimeout(() => titleSearchDropdo
 
 ratingInputs.forEach(el => el.addEventListener("click", handleRatingInputClick));
 
-form.addEventListener("submit", handleNewBookFormSubmission);
+form.addEventListener("submit", validateFormData);
 
 // Event Handlers
 async function handleTitleInputKeyUp() {
@@ -37,34 +37,31 @@ function handleRatingInputClick(e) {
   });
 }
 
-function handleNewBookFormSubmission(e) {
-  validateFormData(e, titleInput.value, authorInput.value, isbnInput.value, reviewInput.value, date_readInput.value);
-}
-
-function validateFormData(e, title, author, isbn, review, date) {
-  if (title.length > 200) {
+function validateFormData(e) {
+  if (titleInput.value.length > 200) {
     alert("Title character count of 200 exceeded, please enter a valid title");
     e.preventDefault();
   }
-  if (author.length > 100) {
+  if (authorInput.value.length > 100) {
     alert("Author name character count of 100 exceeded, please enter a valid author name");
     e.preventDefault();
   }
-  if (isbn.length > 13 || /\D/.test(isbn)) {
+  if (isbnInput.value.length > 13 || isbnInput.value.length < 10 || /\D/.test(isbnInput.value)) {
     alert("Invalid ISBN: Please enter a 10 or 13 digit ISBN without dashes. ISBNs should only contain numbers.");
     e.preventDefault();
   }
-  if (review.length > 10000) {
+  if (reviewInput.value.length > 10000) {
     alert("Review character count of 10,000 exceeded, please enter a valid review");
     e.preventDefault();
   }
   const currentYear = new Date().getFullYear();
-  const inputYear = parseInt(date.split("-")[0]);
+  const inputYear = parseInt(date_readInput.value.split("-")[0]);
   if (inputYear < 1924 || inputYear > currentYear) {
     alert("Please enter a valid date");
     e.preventDefault();
   }
 }
+
 
 // Open Library API
 async function openLibrarySearch(input) {

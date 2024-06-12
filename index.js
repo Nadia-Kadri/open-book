@@ -20,6 +20,7 @@ app.use(
     saveUninitialized: true,
   })
 );
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
@@ -108,7 +109,6 @@ app.post("/new", async (req, res) => {
     );
   } catch (err) {
     console.log(err);
-    // res.sendStatus(404);
   }
   res.redirect("/admin");
 });

@@ -3,6 +3,10 @@ body {
   font-size: 18px;
 }
 
+a {
+  text-decoration: none;
+}
+
 /* Navbar */
 .navbar {
   background-color: #f8f3e5;
@@ -40,8 +44,10 @@ input[name="rating"] {
 /* Contact */
 #contact {
   padding-top: 156px;
-  /* background-color: #f8f3e5; */
-  height: 100vh;
+}
+
+#contact h1 {
+  font-size: 48px;
 }
 
 /* Admin Books */
