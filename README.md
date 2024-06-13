@@ -8,5 +8,5 @@ The Open Library Covers API is used for fetching book covers. This application i
 
 Click the links below to see the deployed application:
 
-- [User View](https://open-book-4y22.onrender.com/){:target="\_blank"}
-- [Admin View](https://open-book-4y22.onrender.com/admin){:target="\_blank"}
+- [User View](https://open-book-4y22.onrender.com/)
+- [Admin View](https://open-book-4y22.onrender.com/admin)
