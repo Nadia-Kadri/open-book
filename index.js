@@ -9,8 +9,9 @@ import session from "express-session";
 import env from "dotenv";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 env.config();
+const connectionString = 'postgres://openbook_5jqb_user:REUB2Fv607JsBn9GPFENqopwha1dzbcZ@dpg-cpl5ldn109ks73dmm220-a/openbook_5jqb'
 
 // Express session middleware to store user session when admin is logged in
 app.use(
@@ -29,12 +30,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Create PostgreSQL client and connect to database
+// const db = new pg.Client({
+//   user: process.env.PG_USER,
+//   host: process.env.PG_HOST,
+//   database: process.env.PG_DATABASE,
+//   password: process.env.PG_PASSWORD,
+//   port: process.env.PG_PORT,
+// });
 const db = new pg.Client({
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DATABASE,
-  password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT,
+  connectionString,
 });
 db.connect();
 
