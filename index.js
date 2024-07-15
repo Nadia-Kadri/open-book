@@ -30,17 +30,17 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Create PostgreSQL client and connect to database
-const db = new pg.Client({
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DATABASE,
-  password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT,
-});
+// const db = new pg.Client({
+//   user: process.env.PG_USER,
+//   host: process.env.PG_HOST,
+//   database: process.env.PG_DATABASE,
+//   password: process.env.PG_PASSWORD,
+//   port: process.env.PG_PORT,
+// });
 // const db = new pg.Client({
 //   connectionString,
 // });
-db.connect();
+// db.connect();
 
 // Non-admin view of book list
 app.get("/", async (req, res) => {
