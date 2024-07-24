@@ -11,7 +11,7 @@ import env from "dotenv";
 const app = express();
 const port = process.env.PORT || 3000;
 env.config();
-const connectionString = 'postgresql://open_book_database_user:rcXceM1M8FJtvS6VB5Q5ezg0VFxj3uSh@dpg-cqaqcmd6l47c73clavk0-a.virginia-postgres.render.com/open_book_database';
+const connectionString = 'postgresql://open_book_database_user:rcXceM1M8FJtvS6VB5Q5ezg0VFxj3uSh@dpg-cqaqcmd6l47c73clavk0-a/open_book_database'
 
 // Express session middleware to store user session when admin is logged in
 app.use(
@@ -30,16 +30,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Create PostgreSQL client and connect to database
-const db = new pg.Client({
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DATABASE,
-  password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT,
-});
 // const db = new pg.Client({
-//   connectionString,
+//   user: process.env.PG_USER,
+//   host: process.env.PG_HOST,
+//   database: process.env.PG_DATABASE,
+//   password: process.env.PG_PASSWORD,
+//   port: process.env.PG_PORT,
 // });
+const db = new pg.Client({
+  connectionString,
+});
 db.connect();
 
 // Non-admin view of book list
