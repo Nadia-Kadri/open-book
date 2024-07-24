@@ -12,7 +12,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 env.config();
 // const connectionString = 'postgres://openbook_5jqb_user:REUB2Fv607JsBn9GPFENqopwha1dzbcZ@dpg-cpl5ldn109ks73dmm220-a/openbook_5jqb'
-const connectionString = 'postgresql://open_book_database_user:rcXceM1M8FJtvS6VB5Q5ezg0VFxj3uSh@dpg-cqaqcmd6l47c73clavk0-a/open_book_database';
+// const connectionString = 'postgresql://open_book_database_user:rcXceM1M8FJtvS6VB5Q5ezg0VFxj3uSh@dpg-cqaqcmd6l47c73clavk0-a/open_book_database';
+const connectionString = 'postgresql://open_book_database_user:rcXceM1M8FJtvS6VB5Q5ezg0VFxj3uSh@dpg-cqaqcmd6l47c73clavk0-a.virginia-postgres.render.com/open_book_database';
 
 // Express session middleware to store user session when admin is logged in
 app.use(
@@ -41,7 +42,7 @@ app.use(passport.session());
 const db = new pg.Client({
   connectionString,
 });
-// db.connect();
+db.connect();
 
 // Non-admin view of book list
 app.get("/", async (req, res) => {
@@ -170,6 +171,6 @@ passport.deserializeUser((user, cb) => {
   cb(null, user);
 });
 
-app.listen(port, '0.0.0.0', () => {
+app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
