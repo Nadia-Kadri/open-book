@@ -1,12 +1,21 @@
 # Open Book
 
-## About
+Open Book is a full-stack web application that allows users to browse through a curated collection of books along with personal reviews. The application also features an admin dashboard for managing the book entries.
 
-A full stack web application that enables users to browse through books I’ve read with my reviews for each. It incorporates an admin dashboard accessible via username and password, allowing the admin to manage book entries by adding or removing them.
+## Features
 
-The Open Library Covers API is used for fetching book covers. This application is built on an Express server, utilizes a PostgreSQL database, and secured with passport-js authentication.
++ User View: Explore the book collection with cover images fetched from the Open Library Covers API.
++ Admin Dashboard: Securely login to add or remove books from the collection.
++ Authentication: Protected routes for admin access, secured using Passport.js.
++ Backend: Built with an Express server and PostgreSQL database.
 
-Click the links below to see the deployed application:
+## Tech Stack
 
-- [User View](https://open-book-cuiv.onrender.com/)
-- [Admin View](https://open-book-cuiv.onrender.com/admin)
++ Frontent: JavaScript, EJS, 
++ Backend: Node.js, Express, PostgreSQL, Passport.js
++ APIs: Open Library Covers API
+
+## Deployed Application
+
++ User view to browse through books: [User View](https://open-book-cuiv.onrender.com/)
++ Admin access to manage books: [Admin View](https://open-book-cuiv.onrender.com/admin)
