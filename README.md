@@ -14,8 +14,3 @@ Open Book is a web application that allows users to browse through a curated col
 + Frontent: JavaScript, EJS, Bootstrap
 + Backend: Node.js, Express, PostgreSQL, Passport.js
 + APIs: Open Library Covers API
-
-## Deployed Application
-
-+ User view to browse through books: [User View](https://open-book-cuiv.onrender.com/)
-+ Admin access to manage books: [Admin View](https://open-book-cuiv.onrender.com/admin)
